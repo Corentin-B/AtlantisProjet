@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Connexion
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <ion-item class="champs input">
+      <ion-label position="floating">{{'Forms.email' | translate}}</ion-label>
+      <ion-input type="email" formControlName="email"
+        [ngClass]="{ 'is-invalid': submitted && registerForm.controls.email.errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && registerForm.controls.email.errors">
+      <div *ngIf="submitted && registerForm.controls.email.errors.pattern" class="erreur-ionic">
+        {{'Forms.error_email' | translate}}
+      </div>
+    </div>
+
+    <ion-item class="champs input">
+      <ion-label position="floating">{{'Forms.password' | translate}}</ion-label>
+      <ion-input type="password" formControlName="password"
+        [ngClass]="{ 'is-invalid': submitted && registerForm.controls.password.errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && registerForm.controls.password.errors">
+      <div *ngIf="submitted && registerForm.controls.password.errors" class="erreur-ionic">
+        {{'Forms.error_password_length' | translate}}
+      </div>
+    </div>
+  </form>
+
+
+  <ion-button *ngIf="registerForm.get('email').value && registerForm.get('password').value" [disabled]="buttonDisable" (click)="Login()">Connexion</ion-button>
+
+  <ion-button (click)="goSignIn()">Inscription</ion-button>
+
+
+
+</ion-content>
